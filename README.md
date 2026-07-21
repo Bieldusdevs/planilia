@@ -6,33 +6,25 @@
 
 ## 🚀 Deploy no Vercel (Frontend)
 
-O frontend está pronto para ser implantado no Vercel. **Importante:** O Vercel precisa saber que o frontend está na pasta `frontend/`.
+O frontend está **pronto para deploy automático** no Vercel! Basta conectar o repositório.
 
-### Passo 1: Configure o projeto no Vercel
-1. Acesse [vercel.com](https://vercel.com) e crie um novo projeto
-2. Importe este repositório
-3. **Na tela de configuração, configure:**
-   - **Root Directory:** `frontend`
-   - **Framework Preset:** Next.js
-   - **Build Command:** `npm run build`
-   - **Output Directory:** `.next`
+### Como funciona:
+- O `vercel.json` na raiz configura o build automaticamente
+- O `.vercelignore` exclui o backend do build
+- O frontend funciona **100% standalone** com localStorage (sem precisar do backend)
 
-### Passo 2: Configure as variáveis de ambiente
-Na seção "Environment Variables" do Vercel, adicione:
+### Deploy automático:
+1. Acesse [vercel.com](https://vercel.com)
+2. Crie um novo projeto e importe este repositório
+3. Clique em "Deploy" - tudo é configurado automaticamente!
+
+### Variáveis de ambiente (opcional):
+Se quiser conectar ao backend:
 ```
-NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+NEXT_PUBLIC_API_URL=http://seu-backend.com/api/v1
 ```
 
-> **Modo Standalone:** O frontend funciona completamente offline usando localStorage! Não é necessário um backend para usar todas as funcionalidades.
-
-### Passo 3: Deploy
-Clique em "Deploy" e pronto! O site estará online em instantes.
-
-**Ou use a CLI:**
-```bash
-npm install -g vercel
-vercel --cwd frontend
-```
+> 💡 **Dica:** O frontend funciona completamente offline usando localStorage! Todos os dados ficam salvos no navegador do usuário.
 
 ---
 
@@ -60,8 +52,7 @@ lingerie-dona-lingerie/
 │   ├── hooks/             # Custom hooks
 │   ├── types/             # TypeScript types
 │   ├── styles/            # CSS/Tailwind styles
-│   ├── vercel.json        # Vercel configuration
-│   └── Dockerfile         # Docker support
+│   ├── Dockerfile         # Docker support
 │
 ├── backend/               # NestJS API
 │   ├── src/
