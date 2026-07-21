@@ -1,0 +1,144 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      UserRole @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  SELLER
+}
+
+model Order {
+  id          Int        @id @default(autoincrement())
+  number      String     @unique
+  date        DateTime   @default(now())
+  clientName  String
+  clientPhone String?
+  clientEmail String?
+  address     String?
+  product     String
+  size        String?
+  color       String?
+  quantity    Int        @default(1)
+  unitPrice   Decimal    @db.Decimal(10, 2)
+  totalPrice  Decimal    @db.Decimal(10, 2)
+  status      OrderStatus @default(PENDING)
+  payment     PaymentMethod?
+  observation String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@map("orders")
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  PIX
+  CREDIT_CARD
+  DEBIT_CARD
+}
+
+model Invoice {
+  id            Int        @id @default(autoincrement())
+  number        String     @unique
+  date          DateTime   @default(now())
+  clientName    String
+  clientCpf     String?
+  clientAddress String?
+  clientPhone   String?
+  paymentMethod PaymentMethod
+  subtotal      Decimal    @db.Decimal(10, 2)
+  discount      Decimal    @db.Decimal(10, 2) @default(0)
+  total         Decimal    @db.Decimal(10, 2)
+  status        InvoiceStatus @default(PENDING)
+  items         InvoiceItem[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id        Int      @id @default(autoincrement())
+  invoice   Invoice  @relation(fields: [invoiceId], references: [id])
+  invoiceId Int
+  product   String
+  size      String?
+  color     String?
+  quantity  Int
+  unitPrice Decimal  @db.Decimal(10, 2)
+  totalPrice Decimal @db.Decimal(10, 2)
+
+  @@map("invoice_items")
+}
+
+enum InvoiceStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+model Visit {
+  id           Int       @id @default(autoincrement())
+  clientName   String
+  clientPhone  String?
+  clientEmail  String?
+  address      String
+  visitDate    DateTime
+  visitTime    String
+  productType  String?
+  status       VisitStatus @default(SCHEDULED)
+  notes        String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("visits")
+}
+
+enum VisitStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model StoreSetting {
+  id          Int      @id @default(1)
+  storeName   String   @default("Lingerie Dona Lingerie")
+  phone       String?
+  email       String?
+  cnpj        String?
+  address     String?
+  instagram   String?
+  facebook    String?
+  primaryColor String  @default("#c18a36")
+  secondaryColor String @default("#1a0c0a")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("store_settings")
+}
