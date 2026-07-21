@@ -6,28 +6,27 @@
 
 ## 🚀 Deploy no Vercel (Frontend)
 
-O frontend está pronto para ser implantado no Vercel em 3 passos:
+O frontend está pronto para ser implantado no Vercel. **Importante:** O Vercel precisa saber que o frontend está na pasta `frontend/`.
 
-### Passo 1: Clone e configure
-```bash
-cd frontend
-npm install
-```
+### Passo 1: Configure o projeto no Vercel
+1. Acesse [vercel.com](https://vercel.com) e crie um novo projeto
+2. Importe este repositório
+3. **Na tela de configuração, configure:**
+   - **Root Directory:** `frontend`
+   - **Framework Preset:** Next.js
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `.next`
 
 ### Passo 2: Configure as variáveis de ambiente
-Crie um arquivo `.env.local` na pasta `frontend/`:
-```env
+Na seção "Environment Variables" do Vercel, adicione:
+```
 NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
 ```
 
 > **Modo Standalone:** O frontend funciona completamente offline usando localStorage! Não é necessário um backend para usar todas as funcionalidades.
 
-### Passo 3: Deploy no Vercel
-1. Acesse [vercel.com](https://vercel.com)
-2. Crie um novo projeto
-3. Importe este repositório
-4. Configure a pasta raiz como `frontend`
-5. Clique em "Deploy"
+### Passo 3: Deploy
+Clique em "Deploy" e pronto! O site estará online em instantes.
 
 **Ou use a CLI:**
 ```bash

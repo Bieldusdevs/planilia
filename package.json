@@ -1,0 +1,20 @@
+{
+  "name": "lingerie-dona-lingerie",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run start:dev",
+    "dev": "docker-compose up",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "deploy:frontend": "cd frontend && vercel --prod"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
