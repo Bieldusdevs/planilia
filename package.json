@@ -1,20 +1,28 @@
 {
   "name": "lingerie-dona-lingerie",
   "version": "1.0.0",
+  "description": "Sistema de Gestão - Lingerie Dona Lingerie",
   "private": true,
-  "workspaces": [
-    "frontend",
-    "backend"
-  ],
   "scripts": {
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev:backend": "cd backend && npm run start:dev",
-    "dev": "docker-compose up",
-    "build:frontend": "cd frontend && npm run build",
-    "build:backend": "cd backend && npm run build",
-    "deploy:frontend": "cd frontend && vercel --prod"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "engines": {
-    "node": ">=20.0.0"
+  "dependencies": {
+    "@heroicons/react": "^2.1.3",
+    "clsx": "^2.1.0",
+    "next": "^14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.48",
+    "@types/node": "^20.11.16",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.34",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
   }
 }
